@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProjectModal from '../components/ProjectModal';
+import { Camera } from 'lucide-react';
 
 const projects = [
   {
@@ -51,21 +52,29 @@ function Projects() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div
-                key={project.id}
-                className="group relative overflow-hidden rounded-lg cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <img 
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-80 object-cover transition duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white">
+              <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="w-full h-64 object-cover"
+                  />
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="absolute top-4 right-4 bg-gold-600 hover:bg-gold-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
+                  >
+                    <Camera size={20} />
+                  </button>
+                </div>
+                <div className="p-6">
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-center px-4">{project.description}</p>
-                  <button className="mt-4 px-6 py-2 bg-gold-600 text-white rounded hover:bg-gold-700 transition">
-                    Voir les photos
+                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="w-full bg-gold-600 text-white px-6 py-3 rounded hover:bg-gold-700 transition-colors flex items-center justify-center space-x-2"
+                  >
+                    <Camera size={20} />
+                    <span>Voir les photos ({project.images.length})</span>
                   </button>
                 </div>
               </div>
