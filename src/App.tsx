@@ -23,7 +23,7 @@ function App() {
           <SocialBar />
           <Navbar />
         </div>
-        <div>
+        <div className="pt-[120px]"> {/* Ajout d'un padding-top pour compenser la hauteur du header */}
           <Home />
         </div>
       </div>
