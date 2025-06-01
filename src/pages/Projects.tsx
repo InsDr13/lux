@@ -10,9 +10,9 @@ const projects = [
     thumbnail: 'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg',
     images: [
       'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg',
-      'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg',
-      'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg',
-      'https://images.pexels.com/photos/1643385/pexels-photo-1643385.jpeg'
+      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
+      'https://images.pexels.com/photos/1105754/pexels-photo-1105754.jpeg',
+      'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg'
     ]
   },
   {
@@ -23,7 +23,7 @@ const projects = [
     images: [
       'https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg',
       'https://images.pexels.com/photos/1643386/pexels-photo-1643386.jpeg',
-      'https://images.pexels.com/photos/1643387/pexels-photo-1643387.jpeg',
+      'https://images.pexels.com/photos/1876045/pexels-photo-1876045.jpeg',
       'https://images.pexels.com/photos/1643388/pexels-photo-1643388.jpeg'
     ]
   },
@@ -34,9 +34,9 @@ const projects = [
     thumbnail: 'https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg',
     images: [
       'https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg',
-      'https://images.pexels.com/photos/1643390/pexels-photo-1643390.jpeg',
-      'https://images.pexels.com/photos/1643391/pexels-photo-1643391.jpeg',
-      'https://images.pexels.com/photos/1643392/pexels-photo-1643392.jpeg'
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+      'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg',
+      'https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg'
     ]
   }
 ];
@@ -52,19 +52,24 @@ function Projects() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="relative">
+              <div 
+                key={project.id} 
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+              >
+                <div className="relative group">
                   <img 
                     src={project.thumbnail}
                     alt={project.title}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="absolute top-4 right-4 bg-gold-600 hover:bg-gold-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110"
-                  >
-                    <Camera size={20} />
-                  </button>
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="bg-gold-600 text-white p-3 rounded-full shadow-lg transform scale-0 group-hover:scale-100 transition-all duration-300 hover:bg-gold-700"
+                    >
+                      <Camera size={24} />
+                    </button>
+                  </div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
