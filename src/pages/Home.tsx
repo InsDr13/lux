@@ -1,10 +1,51 @@
 import { useEffect } from 'react';
-import { Building2, Phone, Mail, MapPin, Clock, Award, Users, Home as HomeIcon, CheckCircle2 } from 'lucide-react';
+import { Building2, Phone, Mail, MapPin, Clock, Award, Users, Home as HomeIcon, CheckCircle2, Camera, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import ProjectModal from '../components/ProjectModal';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
+
+const projects = [
+  {
+    id: 'villa-moderne',
+    title: 'Villa Moderne',
+    description: 'Une villa contemporaine avec vue sur la lagune',
+    thumbnail: 'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg',
+    images: [
+      'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg',
+      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
+      'https://images.pexels.com/photos/1105754/pexels-photo-1105754.jpeg',
+      'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg'
+    ]
+  },
+  {
+    id: 'residence-luxe',
+    title: 'Résidence de Luxe',
+    description: 'Un complexe résidentiel haut de gamme',
+    thumbnail: 'https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg',
+    images: [
+      'https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg',
+      'https://images.pexels.com/photos/1643386/pexels-photo-1643386.jpeg',
+      'https://images.pexels.com/photos/1876045/pexels-photo-1876045.jpeg',
+      'https://images.pexels.com/photos/1643388/pexels-photo-1643388.jpeg'
+    ]
+  },
+  {
+    id: 'penthouse',
+    title: 'Penthouse',
+    description: 'Un penthouse avec finitions luxueuses',
+    thumbnail: 'https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg',
+    images: [
+      'https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg',
+      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+      'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg',
+      'https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg'
+    ]
+  }
+];
 
 const partners = [
   { name: 'Architect Studio', logo: 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg' },
@@ -67,6 +108,8 @@ const faq = [
 ];
 
 export default function HomePage() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -207,41 +250,47 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold mb-12 text-center">Nos Projets</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="group relative overflow-hidden rounded-lg">
-              <img 
-                src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg"
-                alt="Villa Moderne"
-                className="w-full h-80 object-cover transition duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">Villa Moderne</h3>
-                <p className="text-center px-4">Une villa contemporaine avec vue sur la lagune</p>
+            {projects.map((project) => (
+              <div 
+                key={project.id} 
+                className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105"
+              >
+                <div className="relative group">
+                  <img 
+                    src={project.thumbnail}
+                    alt={project.title}
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="bg-gold-600 text-white p-3 rounded-full shadow-lg transform scale-0 group-hover:scale-100 transition-all duration-300 hover:bg-gold-700"
+                    >
+                      <Camera size={24} />
+                    </button>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="w-full bg-gold-600 text-white px-6 py-3 rounded hover:bg-gold-700 transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <Camera size={20} />
+                      <span>Voir les photos ({project.images.length})</span>
+                    </button>
+                    <button
+                      className="w-full border-2 border-gold-600 text-gold-600 px-6 py-3 rounded hover:bg-gold-600 hover:text-white transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <span>En savoir plus</span>
+                      <ArrowRight size={20} />
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="group relative overflow-hidden rounded-lg">
-              <img 
-                src="https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg"
-                alt="Résidence de Luxe"
-                className="w-full h-80 object-cover transition duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">Résidence de Luxe</h3>
-                <p className="text-center px-4">Un complexe résidentiel haut de gamme</p>
-              </div>
-            </div>
-
-            <div className="group relative overflow-hidden rounded-lg">
-              <img 
-                src="https://images.pexels.com/photos/1643389/pexels-photo-1643389.jpeg"
-                alt="Penthouse"
-                className="w-full h-80 object-cover transition duration-300 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col items-center justify-center text-white">
-                <h3 className="text-2xl font-bold mb-2">Penthouse</h3>
-                <p className="text-center px-4">Un penthouse avec finitions luxueuses</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -578,6 +627,13 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      <ProjectModal
+        isOpen={selectedProject !== null}
+        onClose={() => setSelectedProject(null)}
+        images={selectedProject?.images || []}
+        title={selectedProject?.title || ''}
+      />
     </div>
   );
 }
