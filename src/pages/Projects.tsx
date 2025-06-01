@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProjectModal from '../components/ProjectModal';
-import { Camera } from 'lucide-react';
+import { Camera, ArrowRight } from 'lucide-react';
 
 const projects = [
   {
@@ -74,13 +74,21 @@ function Projects() {
                 <div className="p-6">
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-gray-600 mb-4">{project.description}</p>
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="w-full bg-gold-600 text-white px-6 py-3 rounded hover:bg-gold-700 transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <Camera size={20} />
-                    <span>Voir les photos ({project.images.length})</span>
-                  </button>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="w-full bg-gold-600 text-white px-6 py-3 rounded hover:bg-gold-700 transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <Camera size={20} />
+                      <span>Voir les photos ({project.images.length})</span>
+                    </button>
+                    <button
+                      className="w-full border-2 border-gold-600 text-gold-600 px-6 py-3 rounded hover:bg-gold-600 hover:text-white transition-colors flex items-center justify-center space-x-2"
+                    >
+                      <span>En savoir plus</span>
+                      <ArrowRight size={20} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
